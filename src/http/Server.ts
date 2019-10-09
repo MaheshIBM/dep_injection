@@ -1,5 +1,6 @@
 import express from "express";
 import { Logger } from "log4js";
+import { AddressInfo } from "net";
 import { AppRouter } from "./Router";
 
 export class Server {
@@ -19,10 +20,13 @@ export class Server {
     return new Promise((resolve) => {
       const http = this.express
         .listen(this.config.web.port, () => {
-          const port = this.config.web.port;
-          this.logger.info(port);
-          this.logger.info(`[p ${process.pid}] Listening at port ${port} http://localhost:${ port }`);
-          resolve();
+
+          if ( http.address() as AddressInfo) {
+            const { port } = http.address() as AddressInfo;
+            this.logger.info(port);
+            this.logger.info(`[p ${process.pid}] Listening at port ${port} http://localhost:${ port }`);
+            resolve();
+          }
         });
     });
   }
