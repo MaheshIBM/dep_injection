@@ -24,7 +24,8 @@ export class Server {
           if ( http.address() as AddressInfo) {
             const { port } = http.address() as AddressInfo;
             this.logger.info(port);
-            this.logger.info(`[p ${process.pid}] Listening at port ${port} http://localhost:${ port }`);
+            this.logger.info(`[p ${process.pid}] Listening at port \
+            ${port} http://localhost:${ port }`);
             resolve();
           }
         });
