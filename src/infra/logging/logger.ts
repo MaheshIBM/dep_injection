@@ -7,4 +7,4 @@ const getAppLogger = ({ config }: any) => {
   return getLogger();
 };
 
-export default getAppLogger
+export default getAppLogger;
